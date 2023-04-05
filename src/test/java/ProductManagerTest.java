@@ -56,6 +56,30 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected,actual);
     }
+    @Test
+    public void testShouldByNumber() {
+
+        Product[] expected = {smartphone2};
+        Product[] actual = manager.searchBy("11");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void testShouldByOneSymbol() {
+
+        Product[] expected = {book1,book2};
+        Product[] actual = manager.searchBy("r");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void testShouldSearchNoProduct() {
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("King Line");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
 
 

@@ -114,4 +114,68 @@ class ProductRepositoryTest {
 
 
     }
+    @Test
+    public void shouldSaveOneProduct() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(book1);
+
+        Product[] expected = {book1};
+        Product[] actual = repo.findAll();
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+    @Test
+    public void shouldSaveThreeSomeProducts() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(book3);
+        repo.save(book3);
+        repo.save(book3);
+
+        Product[] expected = {book3, book3, book3};
+        Product[] actual = repo.findAll();
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+    @Test
+    public void shouldRemoveAllSmartphone() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(book1);
+        repo.save(book2);
+        repo.save(book3);
+        repo.save(smartphone1);
+        repo.save(smartphone2);
+        repo.save(smartphone3);
+
+        repo.removeById(smartphone1.getId());
+        repo.removeById(smartphone2.getId());
+        repo.removeById(smartphone3.getId());
+        Product[] expected = {book1, book2, book3};
+        Product[] actual = repo.findAll();
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+    @Test
+    public void shouldNotRemoveOneProduct() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(book1);
+        repo.save(book2);
+        repo.save(book3);
+        repo.save(smartphone1);
+        repo.save(smartphone2);
+        repo.save(smartphone3);
+        repo.removeById(book1.getId());
+        repo.removeById(book2.getId());
+        repo.removeById(book3.getId());
+        repo.removeById(smartphone1.getId());
+        repo.removeById(smartphone2.getId());
+
+        Product[] expected = {smartphone3};
+        Product[] actual = repo.findAll();
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
 }
